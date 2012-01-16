@@ -1,0 +1,38 @@
+QBSP :
+======
+
+1.BSP creation heuristic:
+
+Choose a surface, its plan is a candidate for becomming the splitting plan.
+Chose the plan that will generate the least cut.
+
+Subdivizion stops when no more surfaces are available.
+until all surfaces have been used. In the resulting final BSP leafs contain ONE surface
+
+When the BSP generator has no more surfaces, it looks at the content of the last splitted surface and set the leaf content.
+
+Testing proved all this wrong: By tracing I can see that some leafs contain 10 surfaces and 15 faces.....back to reading code:
+
+
+On split, any surface that is right on the splitting plane is marked via onnode and cannot be used as splitting plane later.
+
+1. PartitionSurfaces recurse until a split plan is NOT returned. SelectPartition controls the recursion.
+
+
+2. Why does a surface have several faces ?! A surface is supposed to be flat and can contain any number of vertices ?
+
+3. What is the average number of portal per leafs ? Per node ?
+4. How is the leaf content determinated ?
+5. When does the BSP building process stops splitting ?
+6. What ends up in the PRT file ?
+7. How is the splitting node chosen ?
+
+PartitionSurfaces: At each recursion step the intial surface linked list can be changed. surface->next is EXTREMY likely
+to have been modified so using it, even for a leaf after the BSP has been built would be a non sense.
+
+
+
+
+VIS :
+=====
+
