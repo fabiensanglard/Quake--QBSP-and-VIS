@@ -93,7 +93,7 @@ typedef struct surface_s
 	int			planenum;
 	int			outputplanenum;		// only valid after WriteSurfacePlanes
 	vec3_t		mins, maxs;
-	qboolean		onnode;				// true if surface has already been used
+	qboolean		onnode;			// true if surface has already been used
 									// as a splitting node
 	face_t		*faces;	// links to all the faces on either side of the surf
 } surface_t;

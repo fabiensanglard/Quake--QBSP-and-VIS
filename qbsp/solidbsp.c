@@ -169,7 +169,7 @@ surface_t *ChooseMidPlaneFromList (surface_t *surfaces, vec3_t mins, vec3_t maxs
 ==================
 ChoosePlaneFromList
 
-The real BSP hueristic
+The real BSP heuristic
 ==================
 */
 surface_t *ChoosePlaneFromList (surface_t *surfaces, vec3_t mins, vec3_t maxs, qboolean usefloors)
@@ -293,7 +293,7 @@ surface_t *SelectPartition (surface_t *surfaces)
 		}
 		
 	if (i==0)
-		return NULL;
+		return NULL; //FCS: This will terminate recursion
 		
 	if (i==1)
 		return bestsurface;	// this is a final split
@@ -526,14 +526,17 @@ void LinkConvexFaces (surface_t *planelist, node_t *leafnode)
 	face_t		*f, *next;
 	surface_t	*surf, *pnext;
 	int			i, count;
-	
+	int fsc_surfCount;
+
 	leafnode->faces = NULL;
 	leafnode->contents = 0;
 	leafnode->planenum = -1;
 
 	count = 0;
+	fsc_surfCount = 0;
 	for ( surf = planelist ; surf ; surf = surf->next)
 	{
+		
 		for (f = surf->faces ; f ; f=f->next)
 		{
 			count++;
@@ -542,11 +545,15 @@ void LinkConvexFaces (surface_t *planelist, node_t *leafnode)
 			else if (leafnode->contents != f->contents[0])
 				Error ("Mixed face contents in leafnode");
 		}
+		fsc_surfCount++;
 	}
+
+	//printf("Leaf with %d surfaces and %d faces.\n",fsc_surfCount,count);
 
 	if (!leafnode->contents)
 		leafnode->contents = CONTENTS_SOLID;
 		
+    //Statistics.
 	switch (leafnode->contents)
 	{
 	case CONTENTS_EMPTY:
@@ -737,6 +744,7 @@ node_t *SolidBSP (surface_t *surfhead, qboolean midsplit)
 	node_t	*headnode;
 	
 	qprintf ("----- SolidBSP -----\n");
+	qprintf ("-----midsplit= %d---\n",midsplit);
 
 	headnode = AllocNode ();
 	usemidsplit = midsplit;

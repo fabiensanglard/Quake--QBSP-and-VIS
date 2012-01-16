@@ -137,6 +137,9 @@ GatherNodeFaces
 
 Frees the current node tree and returns a new chain of the surfaces that
 have inside faces.
+
+FCS: This looks like a poorly chosen name and description. This function does
+not return anything and seems to be only freeing memory and faces...
 =============================================================================
 */
 
@@ -181,6 +184,8 @@ void GatherNodeFaces_r (node_t *node)
 ================
 GatherNodeFaces
 
+FCS: This does not gather anything. It frees the BSP tree and re-generate the surfaces
+from the original brushes volume read from the MAP file.
 ================
 */
 surface_t *GatherNodeFaces (node_t *headnode)

@@ -251,7 +251,7 @@ void ClipInside (int splitplane, int frontside, qboolean precedence)
 ==================
 SaveOutside
 
-Saves all of the faces in the outside list to the bsp plane list
+Saves all of the faces in the outside list (outside) to the bsp plane list (validfaces)
 ==================
 */
 void SaveOutside (qboolean mirror)
@@ -422,11 +422,14 @@ surface_t *CSGFaces (brushset_t *bs)
 //
 	for (b1=bs->brushes ; b1 ; b1 = b1->next)
 	{
-	// set outside to a copy of the brush's faces
+	    //FCS: Create a surface for each face, set front content to empty and inner (back content)
+		// to whatever the brush is made of. First surface is stored in "outside" and the rest is
+		// accessible via ->next.
 		CopyFacesToOutside (b1);
 		
 		overwrite = false;
 		
+		//Now we need to see if two brushes are penetrating each other. Treat b2 plans are splitters.
 		for (b2=bs->brushes ; b2 ; b2 = b2->next)
 		{
 		// see if b2 needs to clip a chunk out of b1
@@ -459,6 +462,12 @@ surface_t *CSGFaces (brushset_t *bs)
 				FreeInside (CONTENTS_SOLID);
 		}
 		
+
+		//FCS: All remaining now is a volume that nothing is penetrating.
+		. The volume is stored in "outside" variable
+		//     and needs to be saved in the "validfaces" array.
+
+
 	// all of the faces left in outside are real surface faces
 		if (b1->contents != CONTENTS_SOLID)
 			SaveOutside (true);	// mirror faces for inside view
@@ -471,6 +480,11 @@ surface_t *CSGFaces (brushset_t *bs)
 		Error ("No faces");
 #endif
 
+
+	//FCS: We still need to 
+	//     1. Put the faces from the array in a surface_t
+	//     2. Remove the part of the volume that cannot be seen. This last step will leave
+	//        us with only a visible skin.
 	surfhead = BuildSurfaces ();
 	
 	qprintf ("%5i brushfaces\n", brushfaces);

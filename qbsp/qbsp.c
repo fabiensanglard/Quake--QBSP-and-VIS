@@ -606,7 +606,7 @@ void ProcessEntity (int entnum)
 			if (FillOutside (nodes))
 			{
 				surfs = GatherNodeFaces (nodes);
-				nodes = SolidBSP (surfs, false);	// make a really good tree
+				nodes = SolidBSP (surfs, false);	// make a really good tree with proper heuristic splitting plane selection
 			}
 			FreeAllPortals (nodes);
 		}
