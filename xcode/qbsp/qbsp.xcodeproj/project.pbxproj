@@ -18,7 +18,6 @@
 		2D08CA6C14C1D13200F5A70E /* region.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D08CA5E14C1D13200F5A70E /* region.c */; };
 		2D08CA6D14C1D13200F5A70E /* solidbsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D08CA5F14C1D13200F5A70E /* solidbsp.c */; };
 		2D08CA6E14C1D13200F5A70E /* surfaces.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D08CA6014C1D13200F5A70E /* surfaces.c */; };
-		2D08CA6F14C1D13200F5A70E /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D08CA6114C1D13200F5A70E /* test.cpp */; };
 		2D08CA7014C1D13200F5A70E /* tjunc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D08CA6214C1D13200F5A70E /* tjunc.c */; };
 		2D08CA7114C1D13200F5A70E /* writebsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D08CA6314C1D13200F5A70E /* writebsp.c */; };
 		2D08CA7414C1D16100F5A70E /* libcommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D08CA5314C1D11E00F5A70E /* libcommon.a */; };
@@ -69,7 +68,6 @@
 		2D08CA5E14C1D13200F5A70E /* region.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = region.c; path = ../../../qbsp/region.c; sourceTree = "<group>"; };
 		2D08CA5F14C1D13200F5A70E /* solidbsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = solidbsp.c; path = ../../../qbsp/solidbsp.c; sourceTree = "<group>"; };
 		2D08CA6014C1D13200F5A70E /* surfaces.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = surfaces.c; path = ../../../qbsp/surfaces.c; sourceTree = "<group>"; };
-		2D08CA6114C1D13200F5A70E /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = ../../../qbsp/test.cpp; sourceTree = "<group>"; };
 		2D08CA6214C1D13200F5A70E /* tjunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tjunc.c; path = ../../../qbsp/tjunc.c; sourceTree = "<group>"; };
 		2D08CA6314C1D13200F5A70E /* writebsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = writebsp.c; path = ../../../qbsp/writebsp.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,7 +117,6 @@
 				2D08CA5E14C1D13200F5A70E /* region.c */,
 				2D08CA5F14C1D13200F5A70E /* solidbsp.c */,
 				2D08CA6014C1D13200F5A70E /* surfaces.c */,
-				2D08CA6114C1D13200F5A70E /* test.cpp */,
 				2D08CA6214C1D13200F5A70E /* tjunc.c */,
 				2D08CA6314C1D13200F5A70E /* writebsp.c */,
 			);
@@ -213,7 +210,6 @@
 				2D08CA6C14C1D13200F5A70E /* region.c in Sources */,
 				2D08CA6D14C1D13200F5A70E /* solidbsp.c in Sources */,
 				2D08CA6E14C1D13200F5A70E /* surfaces.c in Sources */,
-				2D08CA6F14C1D13200F5A70E /* test.cpp in Sources */,
 				2D08CA7014C1D13200F5A70E /* tjunc.c in Sources */,
 				2D08CA7114C1D13200F5A70E /* writebsp.c in Sources */,
 			);
