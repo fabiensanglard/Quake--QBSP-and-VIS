@@ -464,7 +464,7 @@ surface_t *CSGFaces (brushset_t *bs)
 		
 
 		//FCS: All remaining now is a volume that nothing is penetrating.
-		. The volume is stored in "outside" variable
+		//     The volume is stored in "outside" variable
 		//     and needs to be saved in the "validfaces" array.
 
 
