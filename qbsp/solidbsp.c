@@ -295,6 +295,7 @@ surface_t *SelectPartition (surface_t *surfaces)
 	if (i==0)
 		return NULL; //FCS: This will terminate recursion
 		
+	
 	if (i==1)
 		return bestsurface;	// this is a final split
 	
@@ -548,7 +549,16 @@ void LinkConvexFaces (surface_t *planelist, node_t *leafnode)
 		fsc_surfCount++;
 	}
 
-	//printf("Leaf with %d surfaces and %d faces.\n",fsc_surfCount,count);
+	//FCS Traces.
+	/*
+	printf("Leaf with %d surfaces and %d faces.\n",fsc_surfCount,count);
+	for ( surf = planelist ; surf ; surf = surf->next)
+	{
+		printf("%.2f,%.2f,%.2f (%d)\n",planes[surf->planenum].normal[0],planes[surf->planenum].normal[1],planes[surf->planenum].normal[2],surf->planenum);
+	}
+	printf("\n");
+	*/
+
 
 	if (!leafnode->contents)
 		leafnode->contents = CONTENTS_SOLID;
@@ -609,7 +619,8 @@ face_t *LinkNodeFaces (surface_t *surface)
 	list = NULL;
 	
 	
-// subdivide
+// subdivide 
+//FCS: Make sure faces will not be too big for the lightmaps: Max dimension is 256 when projected on texture plan.
 	prevptr = &surface->faces;
 	while (1)
 	{
@@ -621,13 +632,18 @@ face_t *LinkNodeFaces (surface_t *surface)
 		prevptr = &f->next;
 	}
 
+
 // copy
 	for (f=surface->faces ; f ; f=f->next)
 	{
 		nodefaces++;
+
+		//Copy
 		new = AllocFace ();
 		*new = *f;
 		f->original = new;
+
+		//Push on the linked list to be returned
 		new->next = list;
 		list = new;
 	}

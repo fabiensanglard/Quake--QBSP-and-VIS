@@ -6,6 +6,14 @@ Overall the code is painful to read:
 - Some function are named in a way that the reader is sent totally in a wrong direction (i.e: GatherNodeFaces actually frees the bsp and
   rebuild the surfaces.
 
+CSG: Constructive Solid Geometry (Technique used in solid modeling. Constructive solid geometry allows a modeler to create a complex surface or object by using Boolean operators to combine objects.)
+http://www.flipcode.com/archives/Constructive_Solid_Geometry.shtml
+
+Good CSG Union stuff
+http://mattn.ninex.info/files/MAPFiles.pdf
+
+Laidlaw and Naylor (BSP based approach)
+
 QBSP :
 ======
 
@@ -139,6 +147,9 @@ heurisitc instead of the mid-plan heuristic).
 		
 		On split, any surface that is right on the splitting plane is marked via onnode and cannot be used as splitting plane later.
 		
+		A leaf can contains several surfaces if they are parallel ( the split selector will never chose a face that
+		split no other polygon).
+
 		1. PartitionSurfaces recurse until a split plan is NOT returned. SelectPartition controls the recursion.
 		
 		
@@ -154,6 +165,14 @@ heurisitc instead of the mid-plan heuristic).
 		to have been modified so using it, even for a leaf after the BSP has been built would be a non sense.
 
 
+Portals: It seems leak are an issue because the tool will not be able to determine which part is inside and which part is outside.
+Quake1 does not feature aeraportal (brush that modify the portal graph in realtime). https://developer.valvesoftware.com/wiki/Areaportal
+A nice explanation about aeraportal leaks (https://developer.valvesoftware.com/wiki/Areaportal). Explain that aeraportal
+can loop around itself.
+
 VIS :
 =====
 
+
+
+      

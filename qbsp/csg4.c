@@ -397,8 +397,10 @@ void CopyFacesToOutside (brush_t *b)
 /*
 ==================
 CSGFaces
+Returns a list of surfaces containing all of the faces
 
-Returns a list of surfaces containing aall of the faces
+FCS: CSG=Constructive Solid Geometry
+http://www.flipcode.com/archives/Constructive_Solid_Geometry.shtml
 ==================
 */
 surface_t *CSGFaces (brushset_t *bs)
@@ -422,7 +424,7 @@ surface_t *CSGFaces (brushset_t *bs)
 //
 	for (b1=bs->brushes ; b1 ; b1 = b1->next)
 	{
-	    //FCS: Create a surface for each face, set front content to empty and inner (back content)
+	    //FCS: Create a face for each face in the brush, set front content to empty and inner (back content)
 		// to whatever the brush is made of. First surface is stored in "outside" and the rest is
 		// accessible via ->next.
 		CopyFacesToOutside (b1);
@@ -464,7 +466,7 @@ surface_t *CSGFaces (brushset_t *bs)
 		
 
 		//FCS: All remaining now is a volume that nothing is penetrating.
-		. The volume is stored in "outside" variable
+		// . The volume is stored in "outside" variable
 		//     and needs to be saved in the "validfaces" array.
 
 

@@ -118,7 +118,7 @@ typedef struct node_s
 	
 // information for leafs
 	int				contents;		// leaf nodes (0 for decision nodes)
-	face_t			**markfaces;	// leaf nodes only, point to node faces
+	face_t			**markfaces;	// leaf nodes only, point to node faces //FCS: Original faces
 	struct portal_s	*portals;
 	int				visleafnum;		// -1 = solid
 	int				valid;			// for flood filling

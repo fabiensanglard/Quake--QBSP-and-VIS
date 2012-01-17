@@ -40,6 +40,10 @@ SubdivideFace
 
 If the face is >256 in either texture direction, carve a valid sized
 piece off and insert the remainder in the next link
+
+FCS: This is where the preprocessing step makes sure a face is not bigger than 256.
+This step is essential for the lightmap generation since the max size of a lightmap is 17x17texels and the engine designer
+did not want to have the lightmap spread too much.
 ===============
 */
 void SubdivideFace (face_t *f, face_t **prevptr)
