@@ -191,6 +191,8 @@ void WriteData (int crc)
 	FILE		*h;
 	int			i;
 
+
+	//FCS: What is this thing doing ?
 	for (def = pr.def_head.next ; def ; def = def->next)
 	{
 		if (def->type->type == ev_function)
@@ -210,11 +212,9 @@ void WriteData (int crc)
 		dd = &globals[numglobaldefs];
 		numglobaldefs++;
 		dd->type = def->type->type;
-		if ( !def->initialized
-		&& def->type->type != ev_function
-		&& def->type->type != ev_field
-		&& def->scope == NULL)
+		if ( !def->initialized && def->type->type != ev_function && def->type->type != ev_field&& def->scope == NULL)
 			dd->type |= DEF_SAVEGLOBGAL;
+
 		dd->s_name = CopyString (def->name);
 		dd->ofs = def->ofs;
 	}
@@ -451,6 +451,7 @@ char *PR_GlobalStringNoContents (gofs_t ofs)
 	return line;
 }
 
+//FCS gofs_t is a global offset int value.
 char *PR_GlobalString (gofs_t ofs)
 {
 	char	*s;
@@ -498,6 +499,7 @@ void PR_PrintStatement (dstatement_t *s)
 {
 	int		i;
 	
+	//FCS: Print statmentID, source code line that generated this statment, and the opcode human readable string
 	printf ("%4i : %4i : %s ", (int)(s - statements), statement_linenums[s-statements], pr_opcodes[s->op].opname);
 	i = strlen(pr_opcodes[s->op].opname);
 	for ( ; i<10 ; i++)
@@ -509,7 +511,7 @@ void PR_PrintStatement (dstatement_t *s)
 	{
 		printf ("branch %i",s->a);
 	}
-	else if ( (unsigned)(s->op - OP_STORE_F) < 6)
+	else if ( (unsigned)(s->op - OP_STORE_F) < 6) //This is in the set { OP_STORE_V , OP_STORE_S, OP_STORE_ENT , OP_STORE_FLD , OP_STORE_FNC }
 	{
 		printf ("%s",PR_GlobalString(s->a));
 		printf ("%s", PR_GlobalStringNoContents(s->b));
@@ -712,8 +714,12 @@ void PrintFunction (char *name)
 	for (i=0 ; i<numfunctions ; i++)
 		if (!strcmp (name, strings + functions[i].s_name))
 			break;
+
+	//FCS: This function is unknown. exit(0) will be called by error.
 	if (i==numfunctions)
 		Error ("No function names \"%s\"", name);
+
+
 	df = functions + i;	
 	
 	printf ("Statements for %s:\n", name);

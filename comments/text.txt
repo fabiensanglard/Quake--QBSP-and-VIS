@@ -194,3 +194,30 @@ http://www.inside3d.com/showtutorial.php?id=153
 http://www.inside3d.com/showtutorial.php?id=154
 http://www.inside3d.com/showtutorial.php?id=156
 http://www.inside3d.com/showtutorial.php?id=157
+
+
+Looks like the compilation is the same as q3cc: The list of all the files to be compiled is in a file (here name progs.src).
+
+"progs.src" content :
+=====================
+			./qwprogs.dat
+
+			defs.qc
+			subs.qc
+			combat.qc
+			items.qc
+			weapons.qc
+			world.qc
+			client.qc
+			spectate.qc
+			player.qc
+			doors.qc
+			buttons.qc
+			triggers.qc
+			plats.qc
+			misc.qc
+
+			server.qc
+
+
+Note: qwprogs.dat is the output filename.
