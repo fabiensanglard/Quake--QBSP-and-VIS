@@ -73,10 +73,13 @@ face_t *NewFaceFromFace (face_t *in)
 ==================
 SplitFace
 
+Seems to be  Sutherland-Hodgma inspired.
 ==================
 */
 void SplitFace (face_t *in, plane_t *split, face_t **front, face_t **back)
 {
+	//FCS: +1 is needed because the first vertext is copied at the end in order to
+	//     allow i+1 lookahead in the loop.
 	vec_t	dists[MAXEDGES+1];
 	int		sides[MAXEDGES+1];
 	int		counts[3];
@@ -104,9 +107,13 @@ void SplitFace (face_t *in, plane_t *split, face_t **front, face_t **back)
 			sides[i] = SIDE_ON;
 		counts[sides[i]]++;
 	}
+
+	//FCS: Duplicate first vertex info at the end because the rest of the algorithm 
+	//     performs a lookahead on the next vertex.
 	sides[i] = sides[0];
 	dists[i] = dists[0];
 	
+	// Check if any edge was indeed split. If nothing was split we may be able to return right away.
 	if (!counts[0])
 	{
 		*front = NULL;
@@ -119,6 +126,8 @@ void SplitFace (face_t *in, plane_t *split, face_t **front, face_t **back)
 		*back = NULL;
 		return;
 	}
+
+
 	
 	*back = newf = NewFaceFromFace (in);
 	*front = new2 = NewFaceFromFace (in);
@@ -203,7 +212,7 @@ void ClipInside (int splitplane, int frontside, qboolean precedence)
 {
 	face_t	*f, *next;
 	face_t	*frags[2];
-	face_t	*insidelist;
+	face_t	*insidelist;  //This will hold the new "inside" linked list
 	plane_t *split;
 	
 	split = &planes[splitplane];
@@ -231,6 +240,8 @@ void ClipInside (int splitplane, int frontside, qboolean precedence)
 			SplitFace (f, split, &frags[0], &frags[1]);
 		}
 		
+
+		//FCS: Simply add the face fragments in the outside or insidelist.
 		if (frags[frontside])
 		{
 			frags[frontside]->next = outside;
@@ -241,6 +252,8 @@ void ClipInside (int splitplane, int frontside, qboolean precedence)
 			frags[!frontside]->next = insidelist;
 			insidelist = frags[!frontside];
 		}
+
+
 	}
 	
 	inside = insidelist;
@@ -347,7 +360,8 @@ surface_t *BuildSurfaces (void)
 
 // create a new surface to hold the faces on this plane
 		s = AllocSurface ();
-		s->planenum = i;
+		s->planenum = i;          //FCS: Q: Why does planenum=i ?
+		                          //     A: Because in the spliting process, faces are inserted in validfaces array as validfaces[face->planenum].
 		s->next = surfhead;
 		surfhead = s;
 		s->faces = *f;
@@ -425,8 +439,8 @@ surface_t *CSGFaces (brushset_t *bs)
 	for (b1=bs->brushes ; b1 ; b1 = b1->next)
 	{
 	    //FCS: Create a face for each face in the brush, set front content to empty and inner (back content)
-		// to whatever the brush is made of. First surface is stored in "outside" and the rest is
-		// accessible via ->next.
+		// to whatever the brush is made of. First surface is stored in "outside" and the rest are
+		// accessible via linked list "->next".
 		CopyFacesToOutside (b1);
 		
 		overwrite = false;
@@ -446,7 +460,7 @@ surface_t *CSGFaces (brushset_t *bs)
 			for (i=0 ; i<3 ; i++)
 				if (b1->mins[i] > b2->maxs[i] || b1->maxs[i] < b2->mins[i])
 					break;
-			if (i<3)
+			if (i<3) //AABB cannot possibly interpenetrate each other.
 				continue;
 
 		// divide faces by the planes of the new brush

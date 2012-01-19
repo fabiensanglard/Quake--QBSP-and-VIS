@@ -90,7 +90,9 @@ typedef struct surface_s
 {
 	struct surface_s	*next;
 	struct surface_s	*original;	// before BSP cuts it up
-	int			planenum;
+	int			planenum;           // FCS: planenum does not refer to an id in a plane database it is just a number sequencially 
+	                                //      given in a loop in CSGFaces. You cannot get a plane equation from this number, the 
+	                                //      only goal is to compare planemun between each other.
 	int			outputplanenum;		// only valid after WriteSurfacePlanes
 	vec3_t		mins, maxs;
 	qboolean		onnode;			// true if surface has already been used

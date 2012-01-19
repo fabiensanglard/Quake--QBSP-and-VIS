@@ -231,29 +231,32 @@ int	FindPlane (plane_t *dplane, int *side)
 	if (dot < 1.0 - ANGLEEPSILON || dot > 1.0 + ANGLEEPSILON)
 		Error ("FindPlane: normalization error");
 	
+	//FCS: Calculate the distance and side.
 	pl = *dplane;
 	NormalizePlane (&pl);
 	if (DotProduct(pl.normal, dplane->normal) > 0)
 		*side = 0;
 	else
 		*side = 1;
-
+    
+	//FCS: Search if we have more or less the same plan in our database.
+	//     Due to 32bits or even 64bits innacuracy we need to use an epsilon as a tolerance factor.
 	dp = planes;	
 	for (i=0 ; i<numbrushplanes;i++, dp++)
 	{
 		dot = DotProduct (dp->normal, pl.normal);
-		if (dot > 1.0 - ANGLEEPSILON 
-		&& fabs(dp->dist - pl.dist) < DISTEPSILON )
+		if (dot > 1.0 - ANGLEEPSILON  && fabs(dp->dist - pl.dist) < DISTEPSILON )
 		{	// regular match
 			return i;		
 		}
 	}
 
+	//FCS: The plan was not in the database and we cannot create new one. This is a unrecoverable situation
 	if (numbrushplanes == MAX_MAP_PLANES)
 		Error ("numbrushplanes == MAX_MAP_PLANES");
 
+	//FCS: Never seen this plan but we can cache it for later queries and return the newly created "cached version".
 	planes[numbrushplanes] = pl;
-
 	numbrushplanes++;
 
 	return numbrushplanes-1;

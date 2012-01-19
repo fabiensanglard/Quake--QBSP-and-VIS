@@ -14,6 +14,9 @@ http://mattn.ninex.info/files/MAPFiles.pdf
 
 Laidlaw and Naylor (BSP based approach)
 
+
+The CSG system relies on a faked OOP system with two objects "inside" in csg4.c and "ouside" in outside.c
+
 QBSP :
 ======
 
