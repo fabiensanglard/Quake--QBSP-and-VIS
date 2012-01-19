@@ -13,9 +13,11 @@ Good CSG Union stuff
 http://mattn.ninex.info/files/MAPFiles.pdf
 
 Laidlaw and Naylor (BSP based approach)
-
+Laidlaw paper: http://www.cs.brown.edu/research/vis/docs/pdf/Laidlaw-1986-CSG.pdf
 
 The CSG system relies on a faked OOP system with two objects "inside" in csg4.c and "ouside" in outside.c
+
+Face splitting against a plane is used all across the board and seems to be seems to be  Sutherland-Hodgma inspired.
 
 QBSP :
 ======

@@ -251,7 +251,7 @@ int	FindPlane (plane_t *dplane, int *side)
 		}
 	}
 
-	//FCS: The plan was not in the database and we cannot create new one. This is a unrecoverable situation
+	//FCS: The plan was not in the database and we cannot create new one. This is an unrecoverable situation
 	if (numbrushplanes == MAX_MAP_PLANES)
 		Error ("numbrushplanes == MAX_MAP_PLANES");
 

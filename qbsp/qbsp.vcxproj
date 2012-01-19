@@ -111,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\comments\text.txt" />
-    <None Include="comments.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
