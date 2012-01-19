@@ -181,3 +181,9 @@ VIS :
 
 
       
+
+QCC :
+=====
+
+QuakeC Reference Manual
+http://pages.cs.wisc.edu/~jeremyp/quake/quakec/quakec.pdf
