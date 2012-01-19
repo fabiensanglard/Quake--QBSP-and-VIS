@@ -35,7 +35,7 @@ char		miptex[MAX_MAP_TEXINFO][16];
 /*
 ===============
 FindMiptex
-
+//FCS: Texture names are given an id (their location is miptext). One texture string name will always return the same id.
 ===============
 */
 int FindMiptex (char *name)
