@@ -741,7 +741,7 @@ void PrintFunction (char *name)
 main
 ============
 */
-void main (int argc, char **argv)
+int main (int argc, char **argv)
 {
 	char	*src;
 	char	*src2;
