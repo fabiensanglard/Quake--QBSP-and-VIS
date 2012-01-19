@@ -187,3 +187,10 @@ QCC :
 
 QuakeC Reference Manual
 http://pages.cs.wisc.edu/~jeremyp/quake/quakec/quakec.pdf
+
+Good tutorial: 
+
+http://www.inside3d.com/showtutorial.php?id=153
+http://www.inside3d.com/showtutorial.php?id=154
+http://www.inside3d.com/showtutorial.php?id=156
+http://www.inside3d.com/showtutorial.php?id=157
