@@ -31,7 +31,7 @@ The world entity can be recognized because it has the key/value: "classname"	"wo
 If the first entity in the map file does not have the right classname (worldspawn): This is a faulty file.
 
 mbrush_t brush_t: 
-  - The map editor delivers volumes as a collection of plan (4 minimun for a Tetrahedron, no upper limit. 
+  - The map editor delivers volumes as a collection of plan (4 minimun for a Tetrahedron, no upper limit). 
   - They are read from the MAP file as mbrush_t.
   - Plan are clipped against each other in order to generate facelet grouped in brush_t.
 surface_t: Volume formed by the facelet are processed further (discarding invisible facelet) and clipping volume against
@@ -48,7 +48,7 @@ Depending on how brushes interact with each other, a surface with many more face
    {
      LoadMapFile
      {
-     | LoadFile //Read text from HD to RAM
+     | LoadFile //Read text from HardDrive to RAM
      | while 
      | ( ParseEntity () //Read all brushes in an entity. The Quake map in one entity made of thousands of brushes.
      |   {
